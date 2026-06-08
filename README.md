@@ -22,6 +22,8 @@ Claude Hub 把 QQ 群聊变成 AI 团队的远程办公室。
 
 **自主**：Agent 全自动运行（bypassPermissions），收消息→思考→回复，无人值守。
 
+**投递**：做完的文档、报告、代码通过 QQ 邮箱直发手机，QQ 生态一站式闭环。
+
 ### 与其他方案的不同
 
 市面上的 AI Agent 框架（LangChain、CrewAI、AutoGen 等）走的都是「框架定义 Agent」的路子——用代码定义 Agent 的行为、记忆、工具调用。Claude Hub 换了一个思路：**Agent 就是一个 Claude Code 会话**，框架只负责把消息送进去、把结果送出来。
@@ -90,7 +92,11 @@ Agent 的行为不靠代码配置文件，而靠 Markdown 格式的 `CLAUDE.md` 
 
 QQ 开放平台完全免费——注册即用，不限制消息量，不按 API 调用次数收费。一个 QQ 号就能跑一个 AI Agent，十个号也是零成本。相比之下，Slack/Discord Bot 需要翻墙、Telegram Bot 国内不能用——QQ 是国内唯一既免费又人人都在用的消息通道。
 
-**6. 全自主运行（bypassPermissions）**
+**6. QQ 邮箱直投：文件方案直达手机**
+
+Agent 做完工作后可以通过 QQ 邮箱直接把结果发到用户手机。Word 文档、代码、报告、截图——QQ 邮箱 SMTP 发送，手机 QQ 邮箱 App 秒收。整个过程 QQ 生态闭环：消息用 QQ Bot，文件用 QQ 邮箱，不需要额外注册任何服务。
+
+**7. 全自主运行（bypassPermissions）**
 
 Agent 会话默认开启 `bypassPermissions`，所有工具调用跳过确认弹窗。Agent 收到消息后自动读文件、写代码、发回复——全程无需人工点「允许」。配合 Hub 的权限门禁钩子，安全操作白名单自动放行，危险操作才拦截。
 
@@ -101,7 +107,7 @@ Agent 会话默认开启 `bypassPermissions`，所有工具调用跳过确认弹
 - **消息分发** — 消息按关键词路由给对应 Agent
 - **GUI 安装向导** — 图形化配置 QQ Bot 和 Agent，开箱即用
 - **DPAPI 加密** — API Key 和 Secret 用 Windows 数据保护 API 加密存储
-- **Monitor 推流** — 文件变更实时推送，Agent 秒级响应
+- **QQ 邮箱投递** — Agent 通过 QQ 邮箱 SMTP 发送文件、报告、方案到用户手机。QQ 消息即时通知，QQ 邮箱接收附件——全在 QQ 生态内，不需要额外注册任何服务。
 
 ## 前置条件
 
