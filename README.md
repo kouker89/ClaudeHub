@@ -8,6 +8,45 @@ Claude Hub 是一套 Python 脚本，把 QQ Bot 的消息转成文件队列，�
 
 核心流程：**QQ 消息 → WebSocket → JSON 队列 → Agent 读取 → 处理 → 写回结果 → QQ 回复**
 
+## 为什么选 Claude Hub
+
+### 与其他方案的不同
+
+市面上的 AI Agent 框架（LangChain、CrewAI、AutoGen 等）走的都是「框架定义 Agent」的路子——用代码定义 Agent 的行为、记忆、工具调用。Claude Hub 换了一个思路：**Agent 就是一个 Claude Code 会话**，框架只负责把消息送进去、把结果送出来。
+
+| | LangChain / CrewAI | Discord Bot 方案 | **Claude Hub** |
+|---|---|---|---|
+| Agent 形态 | Python 脚本 | Bot 回调函数 | Claude Code 原生会话 |
+| Agent 能力 | 框架限定的 tool | 预设回复逻辑 | Claude 全能力（读文件/写代码/搜索/推理） |
+| 消息通道 | 无内置 | Discord | **QQ（国内用户零门槛）** |
+| 消息队列 | 无 / Redis | 无 | **文件队列（零依赖，即插即用）** |
+| 事件推送 | 轮询 | WebSocket 回调 | **Monitor 文件监听推送** |
+| 部署 | pip install + 写代码 | 搭服务器 + 写 handler | **GUI 安装向导，5 分钟上线** |
+| 密钥存储 | .env 明文 | 环境变量 | **DPAPI 加密（Windows 原生）** |
+| 多 Agent | 需手动编排 | 单 Bot | **CLAUDE.md 指令驱动，自动协作** |
+
+### 核心创新
+
+**1. 文件即队列，零基础设施**
+
+不用 Redis、不用 RabbitMQ、不用 Kafka。QQ 消息到达后写入 JSON 文件，Agent 的 Monitor 检测到文件变更立即推送。一个目录就是一个消息系统，可以复制、备份、直接用记事本打开调试。
+
+**2. Monitor 推流，不是轮询**
+
+每个 Agent 有一个轻量 Monitor（`watch-queue.py`），监听文件变更事件。消息一到文件，Monitor 立刻推给 Claude Code，延迟 < 1 秒。不像传统方案需要定时轮询 API，省 Token 也省时间。
+
+**3. Agent = Claude Code 会话**
+
+Agent 不是一个 Python 对象，而是一个完整的 Claude Code 终端会话。它能读文件、写代码、搜索、调用工具、记住上下文——都是 Claude Code 原生能力，不需要写一行工具调用代码。
+
+**4. CLAUDE.md 指令驱动**
+
+Agent 的行为不靠代码配置文件，而靠 Markdown 格式的 `CLAUDE.md` 定义。修改 Agent 的人设、职责、回复规则，改一行 Markdown 就行，不需要改 Python 代码。
+
+**5. QQ 原生集成**
+
+国内用户用 QQ 发消息就像聊天一样。不需要装 Discord、不需要翻墙、不需要学新工具。一个 QQ 号 = 一个 AI Agent。
+
 ## 特性
 
 - **QQ 消息桥接** — WebSocket 接收，JSON 队列分发，支持群聊和私聊
