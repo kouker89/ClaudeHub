@@ -123,7 +123,8 @@ claude-hub/
     ├── qq-helper.py               # 队列读写、状态查询
     ├── watch-queue.py             # Monitor 监视线程
     ├── build-index.py             # 文件索引
-    └── find-file.py               # 文件搜索
+    ├── find-file.py               # 文件搜索
+    └── send-mail.py               # QQ 邮箱发送
 ```
 
 ## 常见问题
