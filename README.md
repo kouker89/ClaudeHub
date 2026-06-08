@@ -10,6 +10,12 @@ Claude Hub 是一套 Python 脚本，把 QQ Bot 的消息转成文件队列，�
 
 ## 为什么选 Claude Hub
 
+**方便**：5 分钟 GUI 安装，零代码新增 Agent，Markdown 改配置。不用 Docker、不用 Redis、不用写框架代码。
+
+**实时**：Monitor 文件监听，消息到达 < 1 秒推送。不轮询、不占 Token、不掉消息。
+
+**自主**：Agent 全自动运行（bypassPermissions），收消息→思考→回复，无人值守。
+
 ### 与其他方案的不同
 
 市面上的 AI Agent 框架（LangChain、CrewAI、AutoGen 等）走的都是「框架定义 Agent」的路子——用代码定义 Agent 的行为、记忆、工具调用。Claude Hub 换了一个思路：**Agent 就是一个 Claude Code 会话**，框架只负责把消息送进去、把结果送出来。
@@ -46,6 +52,10 @@ Agent 的行为不靠代码配置文件，而靠 Markdown 格式的 `CLAUDE.md` 
 **5. QQ 原生集成**
 
 国内用户用 QQ 发消息就像聊天一样。不需要装 Discord、不需要翻墙、不需要学新工具。一个 QQ 号 = 一个 AI Agent。
+
+**6. 全自主运行（bypassPermissions）**
+
+Agent 会话默认开启 `bypassPermissions`，所有工具调用跳过确认弹窗。Agent 收到消息后自动读文件、写代码、发回复——全程无需人工点「允许」。配合 Hub 的权限门禁钩子，安全操作白名单自动放行，危险操作才拦截。
 
 ## 特性
 
