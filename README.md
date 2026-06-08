@@ -36,6 +36,7 @@ Claude Hub 把 QQ 群聊变成 AI 团队的远程办公室。
 | 部署 | pip install + 写代码 | 搭服务器 + 写 handler | **GUI 安装向导，5 分钟上线** |
 | 密钥存储 | .env 明文 | 环境变量 | **DPAPI 加密（Windows 原生）** |
 | 多 Agent | 需手动编排 | 单 Bot | **CLAUDE.md 指令驱动，自动协作** |
+| 平台费用 | 免费（自托管） | 免费 | **QQ 开放平台完全免费，不限量** |
 
 ### 核心创新
 
@@ -85,9 +86,9 @@ Agent 不是一个 Python 对象，而是一个完整的 Claude Code 终端会�
 
 Agent 的行为不靠代码配置文件，而靠 Markdown 格式的 `CLAUDE.md` 定义。修改 Agent 的人设、职责、回复规则，改一行 Markdown 就行。
 
-**5. QQ 原生集成**
+**5. QQ 免费平台**
 
-国内用户用 QQ 发消息就像聊天一样。不需要装 Discord、不需要翻墙、不需要学新工具。一个 QQ 号 = 一个 AI Agent。
+QQ 开放平台完全免费——注册即用，不限制消息量，不按 API 调用次数收费。一个 QQ 号就能跑一个 AI Agent，十个号也是零成本。相比之下，Slack/Discord Bot 需要翻墙、Telegram Bot 国内不能用——QQ 是国内唯一既免费又人人都在用的消息通道。
 
 **6. 全自主运行（bypassPermissions）**
 
